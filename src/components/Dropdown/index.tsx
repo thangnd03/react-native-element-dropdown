@@ -92,10 +92,11 @@ const DropdownComponent: <T>(
       closeModalWhenSelectedItem = true,
       excludeItems = [],
       excludeSearchItems = [],
+      refFlatList = null
     } = props;
 
     const ref = useRef<View>(null);
-    const refList = useRef<FlatList>(null);
+    const refList = useRef<FlatList>(refFlatList);
     const [visible, setVisible] = useState<boolean>(false);
     const [currentValue, setCurrentValue] = useState<any>(null);
     const [listData, setListData] = useState<any[]>(data);
