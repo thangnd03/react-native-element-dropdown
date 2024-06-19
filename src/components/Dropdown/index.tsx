@@ -92,11 +92,11 @@ const DropdownComponent: <T>(
       closeModalWhenSelectedItem = true,
       excludeItems = [],
       excludeSearchItems = [],
-      refFlatList = null
+      scrollToItemByValue
     } = props;
 
     const ref = useRef<View>(null);
-    const refList = useRef<FlatList>(refFlatList);
+    const refList = useRef<FlatList>(null);
     const [visible, setVisible] = useState<boolean>(false);
     const [currentValue, setCurrentValue] = useState<any>(null);
     const [listData, setListData] = useState<any[]>(data);
@@ -269,6 +269,13 @@ const DropdownComponent: <T>(
       if (autoScroll && data.length > 0 && listData.length === data.length) {
         setTimeout(() => {
           if (refList && refList?.current) {
+            if(scrollToItemByValue){
+              refList.current?.scrollToIndex({
+                animated: true,
+                index:scrollToItemByValue._index 
+              })
+              return;
+            }
             const defaultValue =
               typeof value === 'object' ? _.get(value, valueField) : value;
 
@@ -288,7 +295,7 @@ const DropdownComponent: <T>(
           }
         }, 200);
       }
-    }, [autoScroll, data.length, listData, value, valueField]);
+    }, [autoScroll, data.length, listData, value, valueField,scrollToItemByValue]);
 
     const showOrClose = useCallback(() => {
       if (!disable) {
