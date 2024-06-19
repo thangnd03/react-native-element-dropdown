@@ -5,7 +5,6 @@ import type {
   TextProps,
   ImageStyle,
   FlatListProps,
-  FlatList
 } from 'react-native';
 
 export type IDropdownRef = {
@@ -70,5 +69,5 @@ export interface DropdownProps<T> {
   searchQuery?: (keyword: string, labelValue: string) => boolean;
   onChangeText?: (search: string) => void;
   onConfirmSelectItem?: (item: T) => void;
-  refFlatList?:FlatList | null | undefined;
+  scrollToItemByValue?:{_index:number};
 }
